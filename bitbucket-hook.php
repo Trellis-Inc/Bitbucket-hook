@@ -13,6 +13,7 @@ function checkout($commit_hash)
     // Do a git checkout to the web root
     shell_exec('cd ' . $repo_dir . ' && ' . $git_bin_path  . ' fetch');
     shell_exec('cd ' . $repo_dir . ' && GIT_WORK_TREE=' . $web_root_dir . ' ' . $git_bin_path  . ' checkout -f');
+    shell_exec('cd ' . $repo_dir . ' && GIT_WORK_TREE=' . $web_root_dir . ' GIT_DIR=' .$repo_dir . ' ' . $git_bin_path  . ' pull origin ' . $branch);
 
     file_put_contents('deploy.log', date('m/d/Y h:i:s a') . " Deployed branch: " .  $branch . " Commit: " . $commit_hash . "\n", FILE_APPEND);
 }
